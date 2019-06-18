@@ -1,30 +1,27 @@
-export class TeachersModel {
+class PupilsModel {
     constructor() {
-        this._teachers = new Map();
+        this._pupils = new Map();
         this.id = 0;
     }
 
-    add({name, image, dateOfBirth, emails, phones, sex, subjects, description = null}, setid = null) {
+    add({name, image, dateOfBirth, phones, sex, description = null}, setid = null) {
         this._validate(name.first, 'string', 'First name')
             ._validate(name.last, 'string', 'Last name')
             ._validate(image, 'string', 'Image')
             ._validate(dateOfBirth, 'string', 'Date of birth')
             ._validatedate(dateOfBirth, 'Date of birth')
-            ._validate(emails[0].email, 'string', 'Phone')
-            ._validate(emails[0].primary, 'boolean', 'Primary')
             ._validate(phones[0].phone, 'string', 'Phone')
             ._validate(phones[0].primary, 'boolean', 'Primary')
             ._validate(sex, 'string', 'Gender')
             ._validategender(sex)
-            ._validate(subjects[0].subject, 'string', 'Subject')
 
         if (setid != null) { //this is used when this method is called by update() (to not run into id numeration problem)
-            this._teachers.set(setid + '', {name, image, dateOfBirth, phones, sex, description});
+            this._pupils.set(setid + '', {name, image, dateOfBirth, phones, sex, description});
             return setid + '';
         }
 
         this.id++
-        this._teachers.set(this.id + '', {name, image, dateOfBirth, phones, sex, description});
+        this._pupils.set(this.id + '', {name, image, dateOfBirth, phones, sex, description});
         return this.id + '';
     }
 
@@ -49,20 +46,20 @@ export class TeachersModel {
         return this
     }
 
-    read(teacherId) {
-        return console.log(this._teachers.get(teacherId));
+    read(pupilId) {
+        return console.log(this._pupils.get(pupilId));
     }
 
-    update(teacherId, updProf) {
-        if (this._teachers.get(teacherId) != undefined) {
-            this._teachers.delete(teacherId);
-            add(updProf, teacherId);
+    update(pupilId, updProf) {
+        if (this._pupils.get(pupilId) != undefined) {
+            this._pupils.delete(pupilId);
+            add(updProf, pupilId);
         }
     }
 
-    remove(teacherId) {
-        if (this._teachers.get(teacherId) != undefined) {
-            this._teachers.delete(teacherId);
+    remove(pupilId) {
+        if (this._pupils.get(pupilId) != undefined) {
+            this._pupils.delete(pupilId);
         }
     }
 }

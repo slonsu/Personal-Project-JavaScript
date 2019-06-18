@@ -8,12 +8,13 @@ export class SubjectsModel {
         if (description !== null) {
             this.obj.description = description;
         }
-        this.id = '1';
+        
+        return this.id = Symbol();
     }
 
     _validate(key, type, arg) {
         if (typeof key !== type) {
-            throw new Error(`${arg} is required and must be ${arg}`);
+            throw new Error(`${arg} is required and must be ${type}`);
         }
         return this
     }
